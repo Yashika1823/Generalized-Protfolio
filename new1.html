@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Builder</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            text-align: center;
+        }
+        .card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        input, textarea, button {
+            width: 90%;
+            margin-bottom: 10px;
+            padding: 8px;
+        }
+        img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Portfolio Builder</h1>
+    <div class="card">
+        <input type="file" id="imageUpload" accept="image/*" onchange="previewImage(event)">
+        <img id="profileImage" src="" alt="Profile Image">
+        <input type="text" id="name" placeholder="Your Name">
+        <textarea id="bio" placeholder="Short Bio"></textarea>
+        <textarea id="skills" placeholder="Skills (comma-separated)"></textarea>
+        <textarea id="projects" placeholder="Projects (comma-separated)"></textarea>
+        <button onclick="savePortfolio()">Save Portfolio</button>
+        <button onclick="clearPortfolio()">Clear Portfolio</button>
+        <button onclick="window.location.href='new.html'">View Portfolio</button>
+    </div>
+
+    <script>
+        function previewImage(event) {
+            const reader = new FileReader();
+            reader.onload = function() {
+                document.getElementById('profileImage').src = reader.result;
+            };
+            reader.readAsDataURL(event.target.files[0]);
+        }
+
+        function savePortfolio() {
+            const portfolioData = {
+                image: document.getElementById('profileImage').src,
+                name: document.getElementById('name').value,
+                bio: document.getElementById('bio').value,
+                skills: document.getElementById('skills').value,
+                projects: document.getElementById('projects').value
+            };
+            localStorage.setItem('portfolio', JSON.stringify(portfolioData));
+            window.location.href = 'new.html'; // Redirect to portfolio page
+        }
+
+        function clearPortfolio() {
+            document.getElementById('name').value = '';
+            document.getElementById('bio').value = '';
+            document.getElementById('skills').value = '';
+            document.getElementById('projects').value = '';
+            document.getElementById('profileImage').src = '';
+        }
+    </script>
+</body>
+</html>
