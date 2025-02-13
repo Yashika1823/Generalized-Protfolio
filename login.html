@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+            text-align: center;
+        }
+        .card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 50px;
+        }
+        input, button {
+            width: 90%;
+            margin-bottom: 10px;
+            padding: 8px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Login</h1>
+    <div class="card">
+        <input type="text" id="username" placeholder="Username">
+        <input type="password" id="password" placeholder="Password">
+        <button onclick="login()">Login</button>
+    </div>
+
+    <script>
+        function login() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            // Dummy credentials (can be changed later)
+            const storedUsername = "testuser";
+            const storedPassword = "password123";
+
+            if (username === storedUsername && password === storedPassword) {
+                localStorage.setItem('loggedIn', 'true');
+                window.location.href = 'new1.html'; // Redirect to portfolio builder
+            } else {
+                alert("Invalid credentials! Try again.");
+            }
+        }
+
+        // If user is already logged in, redirect to index.html
+        // if (localStorage.getItem('loggedIn') === 'true') {
+        //     window.location.href = 'new1.html';
+        // }
+    </script>
+</body>
+</html>
